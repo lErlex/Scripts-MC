@@ -1,0 +1,7 @@
+player.sendMessage("&8&l[&2&lQuester&8&l]&a&lTheHepp ➡&r1/5 Hola patrullero temporal");
+player.sendMessage("&8&l[&2&lQuester&8&l]&a&lTheHepp ➡&r2/5 tienes que empezar,");
+player.sendMessage("&8&l[&2&lQuester&8&l]&a&lTheHepp ➡&r3/5 por las misiones principales,");
+player.sendMessage("&8&l[&2&lQuester&8&l]&a&lTheHepp ➡&r4/5 también hay misiones secundarias,");
+player.sendMessage("&8&l[&2&lQuester&8&l]&a&lTheHepp ➡&r5/5 suerte guerrero.");
+User = event.getSource();
+npc.executeCommand("bc ¡ "+User.getName()+"&e&l acabo el maestro Kaio uwu&r!");

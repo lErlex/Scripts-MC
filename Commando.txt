@@ -1,0 +1,22 @@
+/give @p 397 1 4 {display:{Name:"Nombre",Lore:[Descripción]},ench:[{id:16, lvl:10},{id:16, lvl:10}]}
+/give @p 300 1 0 {execute:[{/jrmctp1200}]}
+/give @p 300
+https://www.pccomponentes.com/configurador/E67aF3Ca8
+https://www.pccomponentes.com/configurador/887b8d262
+https://www.pccomponentes.com/configurador/01Cd9a923
+https://www.pccompoanentes.com/configurador/7bC29d8b4
+https://www.pccomponentes.com/configurador/8aBaA998F
+/dbcskill givelvl Kaioken 1 @dp
+npc.executeCommand("/jrmctp 200 @p");
+
+
+/nbt me ForgeData.PlayerPersisted.jrmcState = 0
+/nbt me ForgeData.PlayerPersisted.jrmcSSltX = 0
+
+/mv tp @dp e:Simulaciones:6000,6,-25031
+World Edit
+//hsphere (Bloque/s) (Radio) - Crea una esfera vacía.
+/cyl (Bloque/s) (Radio) (Radio2) - Crea un cilindro de un tamaño y bloque/s específico.
+/hcyl (Bloque/s) (Radio) (Radio2) - Crea un cilindro vacío.
+
+/give @p 397 1 4 {display:{Name:"Nombre",Lore:[Descripción]}}

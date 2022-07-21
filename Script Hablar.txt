@@ -1,0 +1,4 @@
+Init
+player = event.getSource();
+Interact
+player.sendMessage("&8&l[&2&lQuester&8&l]&a&lTheHepp ➡&r Hola patrullero temporal")

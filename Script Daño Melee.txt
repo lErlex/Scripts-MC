@@ -1,0 +1,9 @@
+player = event.getTarget();
+user = player.getMCEntity();
+nbt = user.getEntityData().func_74775_l("PlayerPersisted");
+
+var dmg = 130000
+var life = nbt.func_74779_i("jrmcBdy")
+var newlife = parseInt(life)-parseInt(dmg)
+if(newlife < 0) newlife = 0
+npc.executeCommand("powernbt. *"+player.getName()+" ForgeData.PlayerPersisted.jrmcBdy = "+newlife+" int")

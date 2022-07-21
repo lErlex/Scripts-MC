@@ -1,0 +1,28 @@
+function Trans(pNPC, trans, pDMG, pResetF, mess){
+  world.thunderStrike(pNPC.x-3, pNPC.y, pNPC.z);
+  world.thunderStrike(pNPC.x+3, pNPC.y, pNPC.z);
+  world.thunderStrike(pNPC.x, pNPC.y, pNPC.z+3);
+  world.thunderStrike(pNPC.x, pNPC.y, pNPC.z-3);
+  world.spawnParticle("largeexplode",
+    pNPC.x, pNPC.y, pNPC.z, 1, 1, 1, 0.5, 100);
+  pNPC.say(mess);
+  world.spawnClone(
+   pNPC.x, pNPC.y, pNPC.z, 1, trans);
+  this.dmg = pDMG;
+  this.resetF = pResetF;
+}
+var fza = {
+  dmg: 0,
+  resetF: true,
+  Trans:Trans
+}
+world.setTempData("fza", fza);
+
+var dmg = npc.getMaxHealth() - npc.getHealth ();
+if(dmg>= 100 && npc.getHealth()> 100){
+  var fza = world.getTempData("fza");
+  fza.Trans(npc, "Script 2", dmg, false,
+   "No les muestro este formulario a todos");
+  world.setTempData("fza",fza);
+  npc.kill();
+}

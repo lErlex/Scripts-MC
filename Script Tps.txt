@@ -1,0 +1,19 @@
+npc.setTempData("target",null);
+Killed
+player = event.getSource();
+user = player.getMCEntity();
+nbt = user.getEntityData().func_74775_l("PlayerPersisted");
+var boost = nbt.func_74779_i("ServBoost");
+
+if(boost == "") {
+nbt.func_74778_a("ServBoost", 1);
+boost = 1;
+} else if(boost <= 0) {
+nbt.func_74778_a("ServBoost", 1);
+boost = 1;
+}
+
+var tps = 1000;
+var tpsF = Math.floor(tps*parseInt(boost));
+npc.executeCommand("/jrmctp "+tpsF+" "+player.getName());
+player.sendMessage(" &f+ "+tpsF+" TPs");

@@ -1,0 +1,106 @@
+PRIMERA FORMA
+
+¡¡¡¡¡¡¡NOTA!!!!!!! - Para que este script funcione, preste especial atención al parámetro trans. Esto acepta una cadena que es el nombre exacto dado al siguiente formulario, que se establece cuando se clona. Asegúrese de clonarlo en el servidor (NO CLIENTE).
+
+-En eso-
+
+function Trans(pNPC, trans, pDMG, pResetF, mess){
+  world.thunderStrike(pNPC.x-3, pNPC.y, pNPC.z);
+  world.thunderStrike(pNPC.x+3, pNPC.y, pNPC.z);
+  world.thunderStrike(pNPC.x, pNPC.y, pNPC.z+3);
+  world.thunderStrike(pNPC.x, pNPC.y, pNPC.z-3);
+  world.spawnParticle("largeexplode",
+    pNPC.x, pNPC.y, pNPC.z, 1, 1, 1, 0.5, 100);
+  pNPC.say(mess);
+  world.spawnClone(
+   pNPC.x, pNPC.y, pNPC.z, 1, trans);
+  this.dmg = pDMG;
+  this.resetF = pResetF;
+}
+var fza = {
+  dmg: 0,
+  resetF: true,
+  Trans:Trans
+}
+world.setTempData("fza", fza);
+
+-Dañado-
+
+var dmg = npc.getMaxHealth() - npc.getHealth ();
+if(dmg>= 10000000 && npc.getHealth()> 10000000){
+  npc.say (npc.getHealth());
+  var fza = world.getTempData("fza");
+  fza.Trans(npc, "Goku SS2", dmg, false,
+   "No les muestro este formulario a todos");
+  world.setTempData("fza",fza);
+  npc.kill();
+}
+
+-Delicado-
+
+if(npc.getHealth() <= 10000000){
+  var fza = world.getTempData("fza");
+  fza.Trans(npc, "Bubbles", npc.getMaxHealth()/2, false,
+   "Ahora estoy enfadado");
+  world.setTempData("fza",fza);  
+}
+
+FORMAS MEDIAS
+
+¡¡¡¡¡¡NOTA!!!!!!  : La forma en que configuro estos formularios es en la actualización desaparecida si se reinicia. Si no tiene la línea de actualización, no desaparecerán. Y si agarra el objeto fza, luego establece resetF en falso como se muestra en el video con el golem, evitará que el npc muera inmediatamente. También de nuevo, PONGA ATENCIÓN MUY CERCA DE LO QUE HA CONFIGURADO PARA EL VALOR TRANS. Si no lo configura con el nombre del clon del servidor de la transformación deseada, se interrumpirá.
+
+-En eso-
+
+var fza = world.getTempData ("fza");
+
+npc.setHealth (npc.getMaxHealth () - fza.dmg);
+
+-Actualizar-
+
+if (world.getTempData ("fza"). resetF) {npc.kill (); }
+
+-Dañado-
+
+var dmg = npc.getMaxHealth () - npc.getHealth ();
+
+if (dmg> = 10000 && npc.getHealth ()> 0) {
+
+  npc.say (npc.getHealth ());
+
+  var fza = world.getTempData ("fza");
+
+  fza.Trans (npc, "Tran3", dmg, fza.resetF,
+
+    "¿Pensaste que esta era mi forma final? ¡HA!");
+
+  world.setTempData ("fza", fza);
+
+  npc.kill ();
+
+}
+
+-Delicado-
+
+if (npc.getHealth () <= 0) {
+
+  var fza = world.getTempData ("fza");
+
+  fza.Trans (npc, "Tran3", npc.getMaxHealth () / 2, fza.restF,
+
+    "Impresionante, ¡supongo que no me contendré más!");
+
+  world.setTempData ("fza", fza);  
+
+}
+
+FORMA DEFINITIVA
+
+-En eso-
+
+var fza = world.getTempData ("fza");
+
+npc.setHealth (npc.getMaxHealth () - fza.dmg);
+
+-Actualizar-
+
+if (world.getTempData ("fza"). resetF) {npc.kill (); }

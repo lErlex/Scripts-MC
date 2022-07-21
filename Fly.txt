@@ -1,0 +1,73 @@
+-Init-
+var fly = {
+  speed: 4,
+  up: false,
+  gPOS: { x: 0, y: 0, z: 0 },
+  cGlass: false,
+
+  //direccion de vuelo
+  Dir: function Dir(){
+    var dir = {
+      x: npc.getAttackTarget().x-npc.x,
+      y: npc.getAttackTarget().y-npc.y,
+      z: npc.getAttackTarget().z-npc.z
+    };
+    //vector
+    var sqt = Math.sqrt(
+        dir.xdir.x + dir.ydir.y + dir.z*dir.z);
+    this.up = dir.y/sqt > 0;
+    dir.x = npc.x + dir.x/sqt * this.speed;
+    dir.y = npc.y + dir.y/sqt * this.speed;
+    dir.z = npc.z + dir.z/sqt * this.speed;
+
+    return dir;
+  },
+  //vuelo con bloques de cristal
+  CleanG: function CleanG(){
+    if(this.cGlass){
+      world.removeBlock(
+        this.gPOS.x,
+        this.gPOS.y,
+        this.gPOS.z
+      );
+      this.cGlass = false;
+    }
+  },
+
+  //vuelo con bloques
+  FlyB: function FlyB(){
+     //borrar bloque
+     this.CleanG();
+     var dir = this.Dir();
+     npc.setPosition(dir.x,dir.y,dir.z);
+     //add bloque
+     if(world.getBlock(npc.x,npc.y-1,npc.z)==null){
+       var glassB = world.createItem("glass",0,1);
+       this.gPOS.x = Math.floor(npc.x);
+       this.gPOS.y = Math.floor(npc.y-1);
+       this.gPOS.z = Math.floor(npc.z);
+       world.setBlock(this.gPOS.x, this.gPOS.y, 
+         this.gPOS.z, glassB);
+       this.cGlass = true;
+     }
+  },
+
+  //Vuelo con explosiones
+  FlyE: function FlyE(){
+    var dir = this.Dir();
+    npc.setPosition(dir.x,dir.y,dir.z);
+    if(this.up){
+      world.explode(npc.x, npc.y-1, npc.z, 3, false, false);
+    }
+  }
+};
+
+npc.setTempData("fly",fly);
+-Update-
+var target = npc.getAttackTarget();
+var fly = npc.getTempData("fly");
+if(target != null && target.getType() == 1){
+    fly.FlyE();
+}else{
+   fly.CleanG();
+}

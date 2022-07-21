@@ -1,0 +1,23 @@
+Npc Mas fuerte
+Init                         
+var CurH = 1000;
+npc.setTempData();
+world.set.TempData();
+//npc.setMaxHealth(CurH);
+
+Damaged
+var i = 0;
+var CurH = npc.getTempData("CurH");
+for(i<10){
+	CurH = CurH + 10000;
+	npc.setMaxHealth(CurH);
+	npc.setTempData("CurH",CurH);
+}
+
+Killed
+var CurH = npc.getTempData("CurH");
+var i = 0;
+CurH = CurH - CurH + 1000;
+npc.setMaxHealth(CurH);
+npc.setTempData("CurH",CurH);
+

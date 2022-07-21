@@ -1,0 +1,32 @@
+Update
+var target = npc.getTempData("target");
+
+function Teleport(x, y, z){
+ var newZ = Math.random()*20 - 10 + z;
+ var newX = Math.random()*20 - 10 + x;
+ npc.setPosition(newX,y,newZ);
+}
+if(target != null){
+ 
+ if(Math.random()<=0.1){
+   Teleport(target.x, target.y, target.z);
+  }
+  
+}
+
+Init
+npc.setTempData("target",null);
+npc.setTempData("count",0);
+
+
+Target
+npc.setTempData("target",event.getTarget());
+
+Damaged
+var s = event.getSource();
+
+if(s != null && s.getType() == 1){
+  npc.setTempData("target",s);
+}else{
+  npc.says(s.getType());
+}
